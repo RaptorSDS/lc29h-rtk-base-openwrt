@@ -18,8 +18,8 @@ LOG="/var/log/str2str.log"
 
 STA_ID="1"                          # 1..4095, muss != 0 sein (siehe README)
 POS_ECEF="X.XXXX Y.YYYY Z.ZZZZ"     # gleiche Werte wie in PQTMCFGSVIN
-ANT="ANTENNENTYP,,0"                # IGS-Antennenname, Seriennummer, Setup-ID
-RCV="Quectel LC29H(BS),FIRMWARE,"   # Empfängertyp, Firmware ($PQTMVERNO), Seriennummer
+ANT="ADVNULLANTENNA NONE,,0"         # IGS-Antennenname, Seriennummer, Setup-ID
+RCV="Quectel LC29H(BS),LC29HBSNR11A01S,"   # Empfängertyp, Firmware ($PQTMVERNO), Seriennummer
 MSGS="1005(10),1033(10),1077(1),1087(1),1097(1),1117(1),1127(1),1019(2),1020(2),1042(2),1046(2)"
 
 # Warten, bis USB-TTY verfügbar ist (optional)

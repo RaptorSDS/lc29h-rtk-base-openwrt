@@ -76,4 +76,9 @@ Wichtig:
 - `-a "IGS-NAME RADOME,Seriennummer,0"` – Antennenname möglichst nach IGS-Liste (z. B. `ADVNULLANTENNA NONE` für unbekannt).
 - 1230 (GLONASS-Biases) bewusst weggelassen: der LC29H liefert keine Biaswerte, str2str würde Nullen senden.
 - Vor dem Test die laufende Instanz beenden (`killall str2str`), die serielle Schnittstelle kann nur einmal geöffnet werden.
-- Getestet mit RTKLIB demo5 (EX 2.5.1). In älteren Versionen (2.4.3) muss `-msg` ebenfalls vor `-out` stehen.
+- Getestet mit **RTKLIB 2.4.3 b34** (das ist die Version im OpenWrt-Paket `str2str`) und demo5 EX 2.5.1 –
+  gleiches Ergebnis. `-msg` vor die `-out`-Angaben setzen.
+- Alle LC29H-Signale (L1 + L5/E5a/B2a) bleiben beim Neukodieren erhalten, solange str2str mit
+  mindestens 3 Frequenzen gebaut ist (Standard).
+- Firmware-Angabe: `LC29HBSNR11A01S` (2023/02/13) ist die einzige öffentlich dokumentierte BS-Version,
+  eigene Version mit `$PQTMVERNO*58` prüfen.
