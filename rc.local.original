@@ -1,0 +1,14 @@
+# Put your custom commands here that should be executed once
+# the system init finished. By default this file does nothing.
+
+# SICHERUNG: ursprüngliche, stabile Konfiguration (Stream vom LC29H unverändert durchgereicht)
+# Zum Zurückwechseln diesen Inhalt nach /etc/rc.local kopieren. Benötigt /lc29h.cmd.
+# Platzhalter ersetzen: E-Mail, Passwort, Mountpoint.
+
+# Warten, bis USB-TTY verfügbar ist (optional)
+sleep 5
+
+#RTK starten
+str2str -in serial://ttyUSB0:115200#rtcm3 -out ntrips://DEINE_EMAIL:DEIN_PASSWORT@rtk2go.com:2101/MEIN_MOUNTPOINT -c /lc29h.cmd -out tcpsvr://:9000/MEIN_MOUNTPOINT >> /var/log/str2str.log 2>&1 &
+
+exit 0

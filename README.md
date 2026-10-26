@@ -87,3 +87,7 @@ Wichtig:
 `rc.local` enthält den kompletten str2str-Aufruf (Variante mit eigenen Intervallen) zum direkten Einfügen in
 `/etc/rc.local` auf OpenWrt (LuCI: System → Startup → Local Startup). `/lc29h.cmd` muss trotzdem vorhanden sein.
 Der Aufruf läuft in `( sleep 5; ... ) &`, damit der Bootvorgang nicht wartet.
+
+## Sicherung `rc.local.original`
+Ursprüngliche, stabile Konfiguration: str2str reicht den Stream des LC29H unverändert durch (alles 1 Hz).
+Zum Zurückwechseln den Inhalt nach `/etc/rc.local` kopieren und neu starten (oder `killall str2str` und den Aufruf ausführen).
