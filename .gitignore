@@ -1,0 +1,4 @@
+# lokale Kopien mit echten Zugangsdaten nicht einchecken
+*.local
+*.local.sh
+*.local.cmd
