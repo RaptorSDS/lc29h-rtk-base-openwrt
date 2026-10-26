@@ -2,3 +2,4 @@
 *.local
 *.local.sh
 *.local.cmd
+!rc.local

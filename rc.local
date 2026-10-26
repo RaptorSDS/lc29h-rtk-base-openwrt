@@ -1,0 +1,21 @@
+# Put your custom commands here that should be executed once
+# the system init finished. By default this file does nothing.
+
+# LC29H RTK-Base: eigene RTCM-Intervalle + 1033, NTRIP-Upload, TCP :9000 = Original-Stream
+# Benötigt /lc29h.cmd. -sta muss != 0 sein, sonst wird die Position aus -px verworfen.
+# Platzhalter ersetzen: ECEF-Position, E-Mail, Passwort, Mountpoint.
+(
+  sleep 5
+  str2str -in serial://ttyUSB0:115200#rtcm3 \
+    -c /lc29h.cmd \
+    -sta 1 \
+    -px X.XXXX Y.YYYY Z.ZZZZ \
+    -a "ADVNULLANTENNA NONE,,0" \
+    -i "Quectel LC29H(BS),LC29HBSNR11A01S," \
+    -msg "1005(10),1033(10),1077(1),1087(1),1097(1),1117(1),1127(1),1019(2),1020(2),1042(2),1046(2)" \
+    -out "ntrips://DEINE_EMAIL:DEIN_PASSWORT@rtk2go.com:2101/MEIN_MOUNTPOINT#rtcm3" \
+    -out tcpsvr://:9000/MEIN_MOUNTPOINT \
+    >> /var/log/str2str.log 2>&1
+) &
+
+exit 0

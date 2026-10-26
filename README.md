@@ -82,3 +82,8 @@ Wichtig:
   mindestens 3 Frequenzen gebaut ist (Standard).
 - Firmware-Angabe: `LC29HBSNR11A01S` (2023/02/13) ist die einzige öffentlich dokumentierte BS-Version,
   eigene Version mit `$PQTMVERNO*58` prüfen.
+
+## Autostart über `/etc/rc.local`
+`rc.local` enthält den kompletten str2str-Aufruf (Variante mit eigenen Intervallen) zum direkten Einfügen in
+`/etc/rc.local` auf OpenWrt (LuCI: System → Startup → Local Startup). `/lc29h.cmd` muss trotzdem vorhanden sein.
+Der Aufruf läuft in `( sleep 5; ... ) &`, damit der Bootvorgang nicht wartet.
