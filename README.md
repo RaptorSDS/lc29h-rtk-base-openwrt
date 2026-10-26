@@ -55,3 +55,25 @@ GPS+GLO+GAL+QZSS+BeiDou
 
 ## Lizenz
 MIT
+
+## Variante: eigene Intervalle wie bei einer F9P-Base (`rtk-start-msg.sh`)
+Der LC29H selbst kann die Raten nicht ändern, aber `str2str` kann den Stream dekodieren und neu
+kodieren. Dafür bekommt die NTRIP-Ausgabe das Suffix `#rtcm3`, die Liste davor steht in `-msg`:
+
+```
+1005(10),1033(10),1077(1),1087(1),1097(1),1117(1),1127(1),1019(2),1020(2),1042(2),1046(2)
+```
+
+- Beobachtungen/Station (1005, 1033, MSM): Zahl in Klammern = Intervall in Sekunden.
+- Ephemeriden (1019/1020/1042/1046): **ein Satellit pro Intervall**, reihum. `1019(2)` = alle 2 s ein GPS-Satellit.
+  Ohne Klammer werden sie einfach weitergereicht, sobald das Modul sie sendet.
+- Der TCP-Server ohne `#rtcm3` liefert weiter den unveränderten Original-Stream – praktisch zum Vergleichen.
+
+Wichtig:
+- **`-sta` muss gesetzt und ungleich 0 sein.** Sonst übernimmt str2str die Stationsdaten aus der
+  1005 des Moduls und verwirft `-px`, `-a` und `-i` – im Test kam dann 1005 mit Position 0/0/0 heraus.
+- `-px` = dieselbe ECEF-Position wie in `PQTMCFGSVIN`.
+- `-a "IGS-NAME RADOME,Seriennummer,0"` – Antennenname möglichst nach IGS-Liste (z. B. `ADVNULLANTENNA NONE` für unbekannt).
+- 1230 (GLONASS-Biases) bewusst weggelassen: der LC29H liefert keine Biaswerte, str2str würde Nullen senden.
+- Vor dem Test die laufende Instanz beenden (`killall str2str`), die serielle Schnittstelle kann nur einmal geöffnet werden.
+- Getestet mit RTKLIB demo5 (EX 2.5.1). In älteren Versionen (2.4.3) muss `-msg` ebenfalls vor `-out` stehen.
