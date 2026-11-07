@@ -15,7 +15,7 @@
     -msg "1005(10),1033(10),1077(1),1087(1),1097(1),1117(1),1127(1),1019(2),1020(2),1042(2),1046(2)" \
     -out "ntrips://DEINE_EMAIL:DEIN_PASSWORT@rtk2go.com:2101/MEIN_MOUNTPOINT#rtcm3" \
     -out tcpsvr://:9000/MEIN_MOUNTPOINT \
-    >> /var/log/str2str.log 2>&1
+    > /dev/null 2>&1
 ) &
 
 exit 0

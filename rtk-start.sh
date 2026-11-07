@@ -10,7 +10,7 @@ CASTER="rtk2go.com:2101"
 MOUNTPOINT="MEIN_MOUNTPOINT"
 CMDFILE="/lc29h.cmd"          # Befehle, die beim Start an das Modul gehen
 TCP_PORT="9000"               # lokaler TCP-Server (optional)
-LOG="/var/log/str2str.log"
+LOG="/dev/null"              # kein Log: /var liegt im RAM und würde volllaufen
 
 # Warten, bis USB-TTY verfügbar ist (optional)
 sleep 5
@@ -20,4 +20,4 @@ str2str -in "serial://${TTY}:${BAUD}#rtcm3" \
   -out "ntrips://${NTRIP_USER}:${NTRIP_PASS}@${CASTER}/${MOUNTPOINT}" \
   -c "${CMDFILE}" \
   -out "tcpsvr://:${TCP_PORT}/${MOUNTPOINT}" \
-  >> "${LOG}" 2>&1 &
+  > "${LOG}" 2>&1 &

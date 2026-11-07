@@ -14,7 +14,7 @@ CASTER="rtk2go.com:2101"
 MOUNTPOINT="MEIN_MOUNTPOINT"
 CMDFILE="/lc29h.cmd"
 TCP_PORT="9000"
-LOG="/var/log/str2str.log"
+LOG="/dev/null"              # kein Log: /var liegt im RAM und würde volllaufen
 
 STA_ID="1"                          # 1..4095, muss != 0 sein (siehe README)
 POS_ECEF="X.XXXX Y.YYYY Z.ZZZZ"     # gleiche Werte wie in PQTMCFGSVIN
@@ -34,4 +34,4 @@ str2str -in "serial://${TTY}:${BAUD}#rtcm3" \
   -msg "${MSGS}" \
   -out "ntrips://${NTRIP_USER}:${NTRIP_PASS}@${CASTER}/${MOUNTPOINT}#rtcm3" \
   -out "tcpsvr://:${TCP_PORT}/${MOUNTPOINT}" \
-  >> "${LOG}" 2>&1 &
+  > "${LOG}" 2>&1 &
